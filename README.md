@@ -16,7 +16,6 @@ Works with any language or framework — `AGENTS.md` never hardcodes a stack, ev
 
 - **Bug audit & feature discovery workflows** — `PROMPTS/audit.md` and `PROMPTS/discovery.md`, with an automatic Backlog system in `TASKS.md` so findings never get lost or pasted into the wrong file.
 - **Ready-made stack presets** — Flutter, React/Vite, and more added over time. Skip filling `STACK.md` from scratch.
-- **Bilingual** — full Spanish + English versions, same structure.
 - **Version migration guides** — when the protocol updates, a step-by-step guide walks your existing projects through the upgrade instead of you figuring it out by diffing files.
 - Free lifetime updates to all of the above.
 
