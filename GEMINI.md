@@ -28,7 +28,8 @@ This document defines your operating directives as an AI development agent on th
 3.  Analyze the context of the existing code (folder/module structure — see `STACK.md`).
 4.  For new projects, establish context, documentation, and `docs/LEARNINGS.md`.
 5.  Resolve ambiguities by talking with the user.
-6.  Define a testable version of "done".
+6.  If the request contains several independent units of work (multiple features, or an audit followed by "fix them"), ask whether to tackle all of them now as separate tasks or log them in the `docs/TASKS.md` Backlog to decide later — don't merge them into a single task/commit.
+7.  Define a testable version of "done".
 
 ### Phase 2: Reason and Plan
 1.  Identify which files will be created or modified.
@@ -41,8 +42,10 @@ This document defines your operating directives as an AI development agent on th
 1.  Execute the plan, starting by writing the test(s).
 2.  Work in small, atomic increments.
 3.  After each change, run the test and static-analysis commands defined in `STACK.md`.
-4.  Document the process in `docs/LEARNINGS.md`.
-5.  When you finish implementing the task (before considering it closed), run the functional verification defined in section 11 — compiling or passing lint isn't enough.
+4.  **Failure summaries, not raw output.** When a verification command fails, work from the extracted failure information — the failing case, its assertion, and its location — not from the full output of the runner. Passing results, timing tables, and progress output are noise that displaces the part you need. `STACK.md` defines how to extract it for this project's tooling.
+5.  If you spot an incidental bug unrelated to the current task, don't fix it on the spot (that violates "Surgical changes" in section 1) — log it in the `docs/TASKS.md` Backlog with a brief reference (file/line/description) and flag it to the user in your response. The only exception is if the bug blocks completing the current task; in that case, fix it as part of this task and document why it was necessary.
+6.  Document the process in `docs/LEARNINGS.md`.
+7.  When you finish implementing the task (before considering it closed), run the functional verification defined in section 11 — compiling or passing lint isn't enough.
 
 ### Phase 4: Refine and Reflect
 1.  Run the project's full verification suite, including the functional verification from section 11. A task doesn't move to "Done" in `docs/TASKS.md` without that evidence attached.
@@ -62,7 +65,7 @@ This document defines your operating directives as an AI development agent on th
 
 ## 4. Learning Protocol
 
-*   Keep `docs/LEARNINGS.md`: an immutable, timestamped log.
+*   Keep `docs/LEARNINGS.md` in the project root: an immutable, timestamped log.
 *   For each task, add a summary of the PRAR cycle that was run (what was decided, what failed, what was learned).
 
 ## 5. Documentation Protocol
@@ -77,7 +80,7 @@ Mandatory documentation, kept "alive":
 *   `docs/LEARNINGS.md` — learnings log per PRAR cycle (see section 4).
 *   `docs/SESSION.md` — current session state: last task and next step (see section 10).
 *   `docs/DECISIONS.md` — log of relevant technical decisions, including architecture (the *why*), in ADR format (see section 10).
-*   `PROMPTS/` — instruction templates per task type (feature, bugfix, refactor, review — see section 10). *(Bug-audit and feature-discovery workflows with automatic backlog tracking are part of SuperMD Pro.)*
+*   `PROMPTS/` — instruction templates per task type (feature, plan, bugfix, refactor, review — see section 10). *(Bug-audit and feature-discovery workflows with automatic backlog tracking are part of SuperMD Pro.)*
 
 ## 6. Code Conventions
 
@@ -128,6 +131,7 @@ This rule applies to **any data read, written, or displayed to/from an external 
     This keeps the agent from reopening already-settled debates or contradicting a decision made earlier.
 *   **`PROMPTS/`:** Short templates for invoking common tasks consistently. When requesting a task, you can reference the matching template:
     - `PROMPTS/feature.md` — new functionality
+    - `PROMPTS/plan.md` — planning-only: produces a plan and stops, doesn't implement
     - `PROMPTS/bugfix.md` — error correction
     - `PROMPTS/refactor.md` — refactoring without changing behavior
     - `PROMPTS/review.md` — reviewing existing code

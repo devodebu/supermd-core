@@ -59,6 +59,21 @@
 # functional verification (manual smoke test or script — see AGENTS.md section 11)
 ```
 
+### Failure extraction
+
+> How to reduce a failed run to its actionable core for this project's tooling.
+> Used by any role that has to act on a failure — see `AGENTS.md`, Phase 3.
+
+| Purpose | Command |
+|---|---|
+| Extract failing cases from test output | |
+| Extract errors from lint output | |
+
+### Review thresholds
+
+- Maximum change size reviewable in one pass: (e.g. 400 changed lines)
+- Paths excluded from review: (generated files, lock files, vendored code)
+
 ## 9. Stack-specific security
 
 - Where environment variables / secrets live:

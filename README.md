@@ -7,7 +7,7 @@ Works with any language or framework — `AGENTS.md` never hardcodes a stack, ev
 ## What's in Core
 
 - `AGENTS.md` — the full PRAR protocol: perceive, reason, act, refine, with mandatory functional verification (section 11) and behavioral guardrails (simplicity-first, surgical changes).
-- `PROMPTS/feature.md`, `bugfix.md`, `refactor.md`, `review.md` — ready-to-use instruction templates for the 4 most common task types.
+- `PROMPTS/feature.md`, `plan.md`, `bugfix.md`, `refactor.md`, `review.md` — ready-to-use instruction templates for the 5 most common task types.
 - `docs/` — `PRD.md`, `design.md`, `TASKS.md`, `SESSION.md`, `LEARNINGS.md`, `DECISIONS.md` templates to keep your project's context alive across sessions.
 - `STACK.md` — blank template, fill it in for any stack.
 - Compatible with Claude Code, Gemini CLI, and Codex/GPT (`CLAUDE.md`/`GEMINI.md` symlinks included).
